@@ -6,7 +6,9 @@ import java.io.*;
 public class sequential{
     public static void main(String[] args) {
         try{
-         FileReader fr=new FileReader("sample_input.txt");    
+            FileReader fr=new FileReader("sample_input.txt"); 
+            //FileReader fr=new FileReader("1.txt");   
+        
         BufferedReader br=new BufferedReader(fr);
         
         
@@ -18,67 +20,86 @@ public class sequential{
         boolean b=true;
 
         // read input =================================================================================
-        while((sLine=br.readLine())!=null){
-          if (ibuffer==0){
-            //save saze
-            String[] s=new String[2];
-            s=sLine.split(" ");
-            size[0]=Integer.parseInt(s[0]);
-            size[1]=Integer.parseInt(s[1]);
-          } else if (ibuffer==1){
-              //save terrain
-              String[] sAve=sLine.split(" ");
-              double[][] rAve=new double[size[0]][size[1]]; 
-              for (int i=0;i<size[0]*size[1];i++){
-                  rAve[i / size[1] ][i % size[1]]=Double.parseDouble(sAve[i]);
-              }
-          //save tries
-          }else if (ibuffer==2){
-              iTrees=Integer.parseInt(sLine);
-          }
+        //map size
+        sLine=br.readLine();
+     
+    
+        String[] s=new String[2];
+        s=sLine.split(" ");
+        size[0]=Integer.parseInt(s[0]);
+        size[1]=Integer.parseInt(s[1]);
 
-          if (ibuffer>2) {
-            String[] s=sLine.split(" ");
-            if (b){
-                b=false;
-                LTrees=new int[iTrees][3];
-            }else{
-              LTrees[ibuffer-3][0]=Integer.parseInt(s[0]);
-              LTrees[ibuffer-3][1]=Integer.parseInt(s[1]);
-              LTrees[ibuffer-3][2]=Integer.parseInt(s[2]);
-            }
-          }
-          System.out.print(ibuffer+" : "+sLine);  
-          ibuffer++;
+        System.out.println("map size saved");
+
+        //save terrain
+        sLine=br.readLine();
+        
+        String[] sAve=sLine.split(" ");
+       
+        double[][] rAve=new double[size[0]][size[1]]; 
+        for (int i=0;i<size[0]*size[1];i++){
+          rAve[i / size[1] ][i % size[1]]=Double.parseDouble(sAve[i]);
+        }
+
+        System.out.println("terrain saved");
+        
+
+        //number of trees
+        sLine=br.readLine();
+        iTrees=Integer.parseInt(sLine);
+       
+
+       
+        //tree positions and size
+        LTrees=new int[iTrees][3];
+        for (int i=0;i<iTrees;i++){
+            sLine=br.readLine();
+            String[] s1=sLine.split(" ");
+            LTrees[i][0]=Integer.parseInt(s1[0]);
+            LTrees[i][1]=Integer.parseInt(s1[1]);
+            LTrees[i][2]=Integer.parseInt(s1[2]);
+           
         }  
+        System.out.println("trees data saved saved. \n\nComputing...");
+        //System.out.println(LTrees[iTrees-1][0]);
+       
         br.close();    
         fr.close(); 
-        //==============================================================================================
 
+     
+        //==============================================================================================
+        
         double[] TAve=new double[iTrees];
         double sumTot=0;
-        //calculate trees averages 
+        //calculate trees averages  
         for (int i=0;i<iTrees;i++){
             double sum=0;
             //sum pieces of tree
             for (int j1=0;j1<LTrees[i][2];j1++){
                 for (int j2=0;j2<LTrees[i][2];j2++){
-                    if (j1+LTrees[i][0]<size[0]+1 && j2+LTrees[i][0]<size[1]+1 )
-                    sum=sum+rAve[j1+LTrees[i][0]][j2+LTrees[i][1]];                
+                    if (j1+LTrees[i][0]<size[0] && j2+LTrees[i][1]<size[1] ){
+                      sum=sum+rAve[j1+LTrees[i][0]][j2+LTrees[i][1]]; 
+                      
+                    }             
                 }
             }
             TAve[i]=sum;
             sumTot=sum+sumTot;
         }
-
+        
+        
         //print out
         System.out.println(sumTot/iTrees);
         System.out.println(iTrees);
+        
         for (int i=0;i<iTrees;i++){
             System.out.println(TAve[i]);
         }
 
+        
+
         }catch(Exception e){
+            System.out.println(e.getMessage());
 
         }
     }
