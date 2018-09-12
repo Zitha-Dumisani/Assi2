@@ -9,14 +9,23 @@ public class Photosynthesis{
 	
 	public static String Tree_Averages(double[][] rTerrain,int[][] treeData,int NoTrees){
 		//
+<<<<<<< HEAD
+		thread t=new thread(rTerrain,treeData,0,2000);
+=======
 		thread t=new thread(rTerrain,treeData,0,NoTrees-1);
+>>>>>>> 4b09ffc3230c5aa90d69b33b02af2dc79066a097
 		return ForkJoinPool.commonPool().invoke(t);
 	
 	}
     public static void main(String[] args) {
         try{
+<<<<<<< HEAD
+            FileReader fr=new FileReader("sample_input.txt"); 
+            //FileReader fr=new FileReader("1.txt");   
+=======
             //FileReader fr=new FileReader("sample_input.txt"); 
             FileReader fr=new FileReader("1.txt");   
+>>>>>>> 4b09ffc3230c5aa90d69b33b02af2dc79066a097
         
         BufferedReader br=new BufferedReader(fr);
         
@@ -84,9 +93,22 @@ public class Photosynthesis{
 		
 		//fix data
 		
+<<<<<<< HEAD
+        /*
+        
+        for (int i=0;i<LTrees.length;i++){
+            String ss="";
+            for (int j=0;j<LTrees[i].length;j++){
+                ss=ss+"_"+LTrees[i][j];
+            }
+            System.out.println(ss);
+        }
+		*/
+=======
 		//
 		System.out.println("aaaaaaaaaaaa");
 		System.out.println("_"+(iTrees));
+>>>>>>> 4b09ffc3230c5aa90d69b33b02af2dc79066a097
 		System.out.println(Tree_Averages(rAve,LTrees,iTrees));
 
 		
@@ -114,7 +136,10 @@ public class Photosynthesis{
         for (int i=0;i<iTrees;i++){
             System.out.println(TAve[i]);
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4b09ffc3230c5aa90d69b33b02af2dc79066a097
         */
 
         }catch(Exception e){

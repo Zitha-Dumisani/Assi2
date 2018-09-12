@@ -1,3 +1,4 @@
+
 //thread class
 
 import java.util.concurrent.RecursiveTask;
@@ -8,7 +9,7 @@ public class thread extends RecursiveTask<String>{
     int lo; 
     int hi;
     int[][] Trees;
-    int CUTOFF=10;
+    int CUTOFF=100;
 
     double[][] rAve;
     //String ans;
@@ -21,18 +22,29 @@ public class thread extends RecursiveTask<String>{
     //thread code
     public String compute(){
         if(hi - lo < CUTOFF) {
+            
             String s="";
 			//trees average sunlight list
             for (int i=lo;i<hi+1;i++){
+               
                 double sum=0;
                 //sum pieces of tree
+
                 for (int j1=0;j1<Trees[i][2];j1++){
                     for (int j2=0;j2<Trees[i][2];j2++){
+<<<<<<< HEAD
+                        if (j1+Trees[i][0]<rAve.length && j2+Trees[i][1]<rAve[i].length ){
+                            sum=sum+rAve[j1+Trees[i][0]][j2+Trees[i][1]]; 
+                        }              
+                    }
+                }
+=======
                         if (j1+Trees[i][0]<Trees.length && j2+Trees[i][1]<Trees[i].length )
                         sum=sum+rAve[j1+Trees[i][0]][j2+Trees[i][1]];                
                     }
                 }
                 
+>>>>>>> 4b09ffc3230c5aa90d69b33b02af2dc79066a097
                 s=s+i+"_"+sum+"\n";
             }
             //calculate these trees 
@@ -51,4 +63,3 @@ public class thread extends RecursiveTask<String>{
     }
 
 }
-
