@@ -11,8 +11,9 @@ public class test{
     public static void main(String args[]){
         //===========================================================================================================\
         try{
+
+            long startT=System.currentTimeMillis();
             FileReader fr=new FileReader("sample_input.txt");
-           // FileReader fr=new FileReader("2.txt");
             BufferedReader br=new BufferedReader(fr);
             
             //varibales
@@ -22,10 +23,7 @@ public class test{
             int iTrees=0;
             int[][] LTrees;
             boolean b=true;
-
-            // read input =================================================================================
-
-
+// read input =================================================================================
             //map size
             sLine=br.readLine();
             String[] s=new String[2];
@@ -41,9 +39,6 @@ public class test{
             rAve[i / size[1] ][i % size[1]]=Double.parseDouble(sAve[i]);
             }
 
-            System.out.println("terrain saved");
-            
-
             //number of trees
             sLine=br.readLine();
             iTrees=Integer.parseInt(sLine);
@@ -58,36 +53,37 @@ public class test{
                 LTrees[i][2]=Integer.parseInt(s1[2]);
             
             }  
-            System.out.println("trees data saved saved. \n\nComputing...");
         
             br.close();    
             fr.close();
 
-            System.out.println(iTrees+"_"+LTrees.length);
-            
+            System.out.println("input loaded");
+            long inputT=System.currentTimeMillis();
+//==========================================================================================================
+
+            //calculate trees sunlight
             String[] sTreeAve= sum(rAve,LTrees,0,iTrees,size[0],size[1]).split("\n");
-            double sum=0;
-            
-            int ic=0;
+            //calculating average
+            double sum=0;         
             for (int i=0;i<sTreeAve.length;i++){
-                
                 sum=sum+Double.parseDouble(sTreeAve[i].split("_")[1]);
+            }
+
+
+            //timing
+            long end=System.currentTimeMillis();
+            //System.out.println("input time:"+(inputT-startT)+"\nProcessing time:"+(end-inputT));
+            
+            //printing
+            System.out.println(sum/sTreeAve.length);
+            System.out.println(iTrees);
+            for (int i=0;i<sTreeAve.length;i++){
                 System.out.println(sTreeAve[i].split("_")[1]);
             }
             
-           
-            System.out.println(sum/sTreeAve.length);
-            System.out.println(sTreeAve[sTreeAve.length-1]+"_"+sTreeAve.length+"_"+iTrees);
 
         }catch(Exception e){
-            System.out.println(e.getMessage());
-            
-        }
-
-        //===========================================================================================================
-        //
-        
+            System.out.println(e.getMessage());   
+        }  
     } 
-   
-
 }

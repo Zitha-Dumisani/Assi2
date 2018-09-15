@@ -22,25 +22,15 @@ public class Sum extends RecursiveTask<String>{
             String s="";
             double sum=0;
             for (int i=lo;i<hi;i++){
-                
-                sum=0;
-                
+                sum=0; 
                 for (int j1=0;j1<Trees[i][2];j1++){
                     for (int j2=0;j2<Trees[i][2];j2++){
-                      //  if (j1+Trees[i][0]<maxX && j2+Trees[i][1]<maxY){
-        
                              try{ sum=sum+rAve[j1+Trees[i][0]][j2+Trees[i][1]]; }
-                             catch(Exception e){}
-                     //   }             
+                             catch(Exception e){}            
                     }
                 }
-
-                
                 s=s+(i+1)+"_"+sum+"\n";
-              //  System.out.println(s);
-              //  s=s+i+":Sum_"+sum+":maxX_"+maxX+" tre_len"+Trees[i][2]+" tree len_"+ "\n";
             }
-           // System.out.println(s);
             return s;
         }
         else{
