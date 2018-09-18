@@ -71,7 +71,11 @@ public class sequential{
                 }
             }
             TAve[i]=sum;
-            sumTot=sum+sumTot;
+         
+        }
+
+        for(int i=0;i<iTrees;i++){
+            sumTot=TAve[i]+sumTot;
         }
 
         long end=System.currentTimeMillis();

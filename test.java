@@ -4,9 +4,8 @@ import java.io.*;
 
 public class test{
     static final ForkJoinPool fjPool = new ForkJoinPool();
-	static String sum(double[][] a,int[][] b, int c,int d,int i0,int i1){
-        
-	    return fjPool.invoke(new Sum(a,b,c,d,i0,i1));
+	static Double sum(double[][] a,int[][] b, int c,int d,int i0,int i1,double[] A){
+	    return fjPool.invoke(new Sum(a,b,c,d,i0,i1,A));
     }
     public static void main(String args[]){
         //===========================================================================================================\
@@ -57,28 +56,28 @@ public class test{
             br.close();    
             fr.close();
 
+            double[] A = new double[iTrees];
+
             System.out.println("input loaded");
             long inputT=System.currentTimeMillis();
 //==========================================================================================================
 
             //calculate trees sunlight
-            String[] sTreeAve= sum(rAve,LTrees,0,iTrees,size[0],size[1]).split("\n");
-            //calculating average
-            double sum=0;         
-            for (int i=0;i<sTreeAve.length;i++){
-                sum=sum+Double.parseDouble(sTreeAve[i].split("_")[1]);
-            }
+            
+            //calculating average        
+            double sum = sum(rAve,LTrees,0,iTrees,size[0],size[1],A);
+            
 
 
             //timing
             long end=System.currentTimeMillis();
-            //System.out.println("input time:"+(inputT-startT)+"\nProcessing time:"+(end-inputT));
+           // System.out.println("input time:"+(inputT-startT)+"\nProcessing time:"+(end-inputT));
             
             //printing
-            System.out.println(sum/sTreeAve.length);
+            System.out.println(sum/iTrees);
             System.out.println(iTrees);
-            for (int i=0;i<sTreeAve.length;i++){
-                System.out.println(sTreeAve[i].split("_")[1]);
+            for (int i=0;i<iTrees;i++){
+                System.out.println(A[i]);
             }
             
 
